@@ -1,4 +1,4 @@
-package com.example.demo.controller.expense;
+package com.example.demo.controller.workspace;
 
 import java.util.List;
 
@@ -13,50 +13,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.dto.expense.ExpenseCreateRequest;
-import com.example.demo.entity.expense.Expense;
-import com.example.demo.service.expense.ExpenseService;
+import com.example.demo.dto.workspace.WorkspaceCreateRequest;
+import com.example.demo.entity.workspace.Workspace;
+import com.example.demo.service.workspace.WorkspaceService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/expenses")
-public class ExpenseController {
+@RequestMapping("/api/workspaces")
+public class WorkspaceController {
 
-    private final ExpenseService expenseService;
+    private final WorkspaceService workspaceService;
 
-    public ExpenseController(ExpenseService expenseService) {
-        this.expenseService = expenseService;
+    public WorkspaceController(WorkspaceService workspaceService) {
+        this.workspaceService = workspaceService;
     }
 
     @GetMapping
-    public List<Expense> getAll() {
-        return expenseService.getAll();
+    public List<Workspace> getAll() {
+        return workspaceService.getAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Expense> getById(@PathVariable Long id) {
-        return expenseService.getById(id)
+    public ResponseEntity<Workspace> getById(@PathVariable Long id) {
+        return workspaceService.getById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Expense> create(@Valid @RequestBody ExpenseCreateRequest request) {
-        Expense created = expenseService.create(request);
+    public ResponseEntity<Workspace> create(@Valid @RequestBody WorkspaceCreateRequest request) {
+        Workspace created = workspaceService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Expense> update(@PathVariable Long id, @Valid @RequestBody ExpenseCreateRequest request) {
-        return expenseService.update(id, request)
+    public ResponseEntity<Workspace> update(@PathVariable Long id, @Valid @RequestBody WorkspaceCreateRequest request) {
+        return workspaceService.update(id, request)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        if (!expenseService.delete(id)) {
+        if (!workspaceService.delete(id)) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.noContent().build();
