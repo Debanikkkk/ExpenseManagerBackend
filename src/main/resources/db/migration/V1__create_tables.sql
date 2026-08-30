@@ -1,5 +1,19 @@
 -- Migration V1: Create initial tables for TaskMaster Backend
 
+-- Users table
+CREATE TABLE users (
+    id BIGSERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create indexes for better query performance
+CREATE INDEX idx_users_email ON users(email);
+
 CREATE TABLE tasks (
     id BIGSERIAL PRIMARY KEY,
     workspace_id BIGINT NOT NULL,
@@ -29,3 +43,5 @@ CREATE INDEX idx_tasks_status ON tasks(status);
 CREATE INDEX idx_tasks_due ON tasks(due);
 
 CREATE INDEX idx_workspaces_name ON workspaces(title);
+CREATE INDEX idx_users_email ON users(email);
+
