@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.workspace.WorkspaceCreateRequest;
+import com.example.demo.dto.workspace.WorkspaceDashboardResponse;
 import com.example.demo.entity.workspace.Workspace;
 import com.example.demo.service.workspace.WorkspaceService;
 
@@ -32,6 +33,12 @@ public class WorkspaceController {
     @GetMapping
     public List<Workspace> getAll() {
         return workspaceService.getAll();
+    }
+
+    // New endpoint for dashboard with calculated progress
+    @GetMapping("/dashboard")
+    public List<WorkspaceDashboardResponse> getDashboardData() {
+        return workspaceService.getDashboardData();
     }
 
     @GetMapping("/{id}")

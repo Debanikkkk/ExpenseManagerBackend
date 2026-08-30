@@ -7,10 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "workspaces")
@@ -34,13 +32,9 @@ public class Workspace {
     @NotBlank
     private String description;
 
-    @NotNull
-    @Min(0)
-    @Max(100)
-    private Integer progress;
+    private LocalDateTime createdAt;
 
-    @NotBlank
-    private String updatedText;
+    private LocalDateTime updatedAt;
 
     public Long getId() {
         return id;
@@ -82,19 +76,19 @@ public class Workspace {
         this.description = description;
     }
 
-    public Integer getProgress() {
-        return progress;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setProgress(Integer progress) {
-        this.progress = progress;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public String getUpdatedText() {
-        return updatedText;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdatedText(String updatedText) {
-        this.updatedText = updatedText;
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
