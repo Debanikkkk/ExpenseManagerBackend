@@ -12,7 +12,7 @@ CREATE TABLE users (
 );
 
 -- Create indexes for better query performance
-CREATE INDEX idx_users_email ON users(email);
+-- CREATE INDEX idx_users_email ON users(email);
 
 CREATE TABLE tasks (
     id BIGSERIAL PRIMARY KEY,
